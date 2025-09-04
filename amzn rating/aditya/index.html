@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manish Kumawat — eCommerce Growth Portfolio</title>
+    <meta name="description"
+        content="Portfolio website for eCommerce growth services: Amazon listing optimization, brand reputation, creatives, and compliant review management." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b1020;
+            /* deep navy */
+            --card: #0f1530;
+            --muted: #9aa3b2;
+            --text: #e6eaf2;
+            --brand: #7c5cff;
+            /* violet */
+            --brand-2: #4fd1c5;
+            /* teal */
+            --accent: #ffd166;
+            /* warm */
+            --ring: 0 0 0 3px rgba(124, 92, 255, .25);
+            --radius: 16px;
+            --shadow: 0 8px 30px rgba(0, 0, 0, .35);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(1200px 600px at 80% -10%, rgba(124, 92, 255, .15), transparent 60%), radial-gradient(1000px 600px at -10% 20%, rgba(79, 209, 197, .12), transparent 60%), var(--bg);
+            color: var(--text);
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        img {
+            max-width: 100%;
+            display: block
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+            /* 20px se thoda kam, mobile-friendly */
+            overflow-x: hidden
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .9rem 1.1rem;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--brand), #6b8cff);
+            color: #fff;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, .1);
+            box-shadow: var(--shadow);
+            transition: transform .2s ease, box-shadow .2s ease
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(124, 92, 255, .35)
+        }
+
+        .btn.alt {
+            background: linear-gradient(135deg, var(--brand-2), #5ceed8)
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .35rem .6rem;
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 999px;
+            font-size: .8rem;
+            color: var(--muted);
+            backdrop-filter: blur(6px);
+            background: rgba(255, 255, 255, .06)
+        }
+
+        /* Navbar */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(11, 16, 32, .6);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .7rem
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: conic-gradient(from 180deg at 50% 50%, var(--brand), var(--brand-2), var(--accent), var(--brand));
+            box-shadow: 0 6px 20px rgba(124, 92, 255, .35)
+        }
+
+        .brand h1 {
+            font-size: 1.05rem;
+            margin: 0
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center
+        }
+
+        .nav-links a {
+            padding: .55rem .75rem;
+            border-radius: 10px;
+            color: var(--muted)
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, .06);
+            color: var(--text)
+        }
+
+        .menu-btn {
+            display: none
+        }
+
+        /* Hero */
+        .hero {
+            padding: 72px 0 36px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 28px;
+            align-items: center
+        }
+
+        .headline {
+            font-size: clamp(1.7rem, 2.5vw + 1rem, 3rem);
+            line-height: 1.1;
+            margin: 0 0 14px;
+            font-weight: 800
+        }
+
+        .sub {
+            color: var(--muted);
+            font-size: 1.05rem
+        }
+
+        .hero-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .03));
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 18px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow)
+        }
+
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 20px
+        }
+
+        .kpi {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 14px;
+            padding: 16px
+        }
+
+        .kpi h3 {
+            margin: 0;
+            font-size: 1.6rem
+        }
+
+        .kpi p {
+            margin: .25rem 0 0;
+            color: var(--muted);
+            font-size: .9rem
+        }
+
+        /* Sections */
+        section {
+            padding: 64px 0;
+            border-top: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 22px
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: 1.6rem
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: var(--radius);
+            padding: 18px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .card h3 {
+            margin: 0 0 8px
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        /* Services icons */
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(124, 92, 255, .18), rgba(79, 209, 197, .18));
+            border: 1px solid rgba(255, 255, 255, .08);
+            margin-bottom: 10px
+        }
+
+        /* Showcase */
+        .showcase {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 18px
+        }
+
+        .shot {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02))
+        }
+
+        .shot::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(400px 120px at -10% -10%, rgba(124, 92, 255, .16), transparent 40%)
+        }
+
+        .shot figcaption {
+            position: absolute;
+            left: 12px;
+            bottom: 10px;
+            padding: .35rem .6rem;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .45);
+            border: 1px solid rgba(255, 255, 255, .1);
+            font-size: .8rem
+        }
+
+        /* Testimonials */
+        .testi-wrap {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 18px
+        }
+
+        .quote {
+            font-size: 1.05rem
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            border: 2px solid rgba(255, 255, 255, .5)
+        }
+
+        .testi {
+            display: flex;
+            gap: 12px
+        }
+
+        /* FAQ */
+        details {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 12px;
+            padding: 14px
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        details+details {
+            margin-top: 12px
+        }
+
+        /* Contact */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        form .full {
+            grid-column: 1/-1
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .04);
+            color: var(--text);
+            outline: none
+        }
+
+        input:focus,
+        textarea:focus {
+            box-shadow: var(--ring);
+            border-color: rgba(124, 92, 255, .55)
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical
+        }
+
+        /* Footer */
+        footer {
+            padding: 24px 0;
+            color: var(--muted);
+            border-top: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .hero-grid {
+                grid-template-columns: 1fr
+            }
+
+            .kpis {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .showcase {
+                grid-template-columns: 1fr
+            }
+
+            .testi-wrap {
+                grid-template-columns: 1fr
+            }
+
+            form {
+                grid-template-columns: 1fr
+            }
+
+            .menu-btn {
+                display: inline-flex
+            }
+
+            .nav-links {
+                position: absolute;
+                inset: 56px 16px auto 16px;
+                background: rgba(15, 21, 48, .95);
+                border: 1px solid rgba(255, 255, 255, .08);
+                border-radius: 14px;
+                padding: 12px;
+                flex-direction: column;
+                gap: 6px;
+                display: none
+            }
+
+            .nav-links.open {
+                display: flex
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="nav">
+        <div class="container nav-wrap">
+            <div class="brand">
+                <div class="logo" aria-hidden="true"></div>
+                <h1>Manish Kumawat</h1>
+                <span class="badge">eCommerce Growth Partner</span>
+            </div>
+            <button class="menu-btn btn alt" aria-label="Toggle Menu">Menu</button>
+            <div class="nav-links" id="navLinks">
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact" class="btn">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="badge">For Amazon & D2C Sellers</p>
+                <h2 class="headline">Boost Ratings, Trust & Sales — the <span
+                        style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">compliant</span>
+                    way.</h2>
+                <p class="sub">I help sellers improve product visibility with <strong>listing optimization</strong>,
+                    <strong>brand reputation advisory</strong>, and <strong>feedback management</strong> that follows
+                    platform policies.
+                </p>
+                <div style="display:flex;gap:10px;margin-top:12px">
+                    <a class="btn" href="#contact">Work With Me</a>
+                    <a class="btn alt" href="#work">See Results</a>
+                </div>
+                <div class="kpis">
+                    <div class="kpi">
+                        <h3>500+</h3>
+                        <p>Seller Interactions</p>
+                    </div>
+                    <div class="kpi">
+                        <h3>4.6 → 4.9</h3>
+                        <p>Avg. Rating Lift (advisory)</p>
+                    </div>
+                    <div class="kpi">
+                        <h3>120%</h3>
+                        <p>CTR Boost (A+ & images)</p>
+                    </div>
+                    <div class="kpi">
+                        <h3>24/7</h3>
+                        <p>Support</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-card">
+                <img alt="Dashboard mock"
+                    src="img1.png"/>
+            </div>
+        </div>
+    </header>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="container">
+            <div class="section-head">
+                <h2>Services</h2>
+                <span class="badge">Policy‑friendly & results‑driven</span>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="icon">💡</div>
+                    <h3>Listing Optimization</h3>
+                    <p class="muted">Keywords, titles, bullets, A+ content, and storefront improvements to boost CTR &
+                        conversions.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📈</div>
+                    <h3>Reputation & Feedback Advisory</h3>
+                    <p class="muted">Compliant strategies to encourage genuine buyer feedback, handle negatives, and
+                        improve star ratings.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🎨</div>
+                    <h3>Creative Production</h3>
+                    <p class="muted">High‑impact images, comparison charts, and short videos to increase trust and
+                        clicks.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🛒</div>
+                    <h3>PPC & Growth</h3>
+                    <p class="muted">Campaign structure, keyword harvesting, and ACOS optimization for profitable scale.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="icon">🤝</div>
+                    <h3>Customer Support Playbooks</h3>
+                    <p class="muted">Templates & SOPs for post‑purchase communication that follow marketplace policies.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="icon">🧭</div>
+                    <h3>Compliance Guidance</h3>
+                    <p class="muted">Stay within platform rules while building long‑term brand equity and social proof.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK / SHOWCASE -->
+    <section id="work">
+        <div class="container">
+            <div class="section-head">
+                <h2>Selected Work</h2>
+                <a class="badge" href="#contact">Need similar results?</a>
+            </div>
+            <div class="showcase">
+                <figure class="shot">
+                    <img alt="Case Study graph"
+                        src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'><rect width='100%' height='100%' fill='%2310142e'/><polyline points='40,520 180,480 320,450 460,420 600,360 740,300 880,260 1020,200 1160,160' fill='none' stroke='%237c5cff' stroke-width='6'/><circle cx='1160' cy='160' r='8' fill='%234fd1c5'/><text x='60' y='80' fill='%23e6eaf2' font-size='28' font-family='Inter'>Conversion Rate Growth</text></svg>" />
+                    <figcaption>Beauty Category — 38% CVR lift in 6 weeks</figcaption>
+                </figure>
+                <div class="grid-3" style="display:grid;grid-template-columns:1fr;gap:18px">
+                    <figure class="shot">
+                        <img alt="Listing revamp"
+                            src="img2.png" />
+                        <figcaption>Listing Revamp — +120% CTR</figcaption>
+                    </figure>
+                    <figure class="shot">
+                        <img alt="A+ content"
+                            src="img3.png" />
+                        <figcaption>A+ Content — trust boosters</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-head">
+                <h2>Happy Clients</h2><span class="badge">Real brands • Real results</span>
+            </div>
+            <div class="testi-wrap">
+                <div class="card">
+                    <div class="testi">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <div>
+                            <p class="quote">“Manish handled our listing overhaul, creatives and feedback strategy.
+                                Ratings improved and organic sales followed.”</p>
+                            <p class="muted">— Ankit, FMCG Seller</p>
+                        </div>
+                    </div>
+                    <hr style="border-color:rgba(255,255,255,.06);margin:16px 0">
+                    <div class="testi">
+                        <div class="avatar" aria-hidden="true"></div>
+                        <div>
+                            <p class="quote">“Clean process, clear reporting, and strong results without policy issues.
+                                Recommended.”</p>
+                            <p class="muted">— Priya, Home & Kitchen</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0">What you get</h3>
+                    <ul class="muted" style="line-height:1.8">
+                        <li>Audit & growth roadmap (7–10 days)</li>
+                        <li>Keyword & listing revamp</li>
+                        <li>A+ content & image set</li>
+                        <li>Compliant feedback playbooks</li>
+                        <li>Clear weekly reporting</li>
+                    </ul>
+                    <a class="btn" href="#contact" style="margin-top:8px">Request Proposal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-head">
+                <h2>FAQ</h2><span class="badge">Transparent & policy‑aligned</span>
+            </div>
+            <details>
+                <summary>Do you offer paid reviews or rating manipulation?</summary>
+                <p class="muted">No. I do not engage in or support fake reviews or any activity that violates
+                    marketplace policies. I help you improve genuine customer experience, optimize listings, and
+                    implement ethical feedback requests.</p>
+            </details>
+            <details>
+                <summary>How do you help improve ratings compliantly?</summary>
+                <p class="muted">By fixing discoverability and conversion issues, improving packaging & instructions,
+                    and setting up post‑purchase communication that encourages authentic feedback while following
+                    platform rules.</p>
+            </details>
+            <details>
+                <summary>What categories have you worked with?</summary>
+                <p class="muted">Beauty, Personal Care, Home & Kitchen, Toys, Electronics Accessories, and Grocery.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-head">
+                <h2>Let’s Grow Your Sales</h2>
+                <span class="badge">Get a free mini‑audit</span>
+            </div>
+            <div class="card">
+                <form onsubmit="sendMessage(event)">
+                    <div>
+                        <label for="name" class="muted">Your Name</label>
+                        <input id="name" name="name" required placeholder="e.g., Rahul Sharma" />
+                    </div>
+                    <div>
+                        <label for="brand" class="muted">Brand / Store</label>
+                        <input id="brand" name="brand" required placeholder="e.g., GlowCare" />
+                    </div>
+                    <div class="full">
+                        <label for="email" class="muted">Email</label>
+                        <input id="email" name="email" type="email" required placeholder="you@brand.com" />
+                    </div>
+                    <div class="full">
+                        <label for="message" class="muted">What do you need help with?</label>
+                        <textarea id="message" name="message" required
+                            placeholder="Tell me about your goals and current challenges…"></textarea>
+                    </div>
+                    <div class="full" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                        <button class="btn" type="submit">Send Inquiry</button>
+                        <a class="btn alt" href="https://wa.me/7340056977" target="_blank" rel="noopener">WhatsApp</a>
+                        <span class="muted">Avg. reply time: under 24h</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container"
+            style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <p>© <span id="y"></span> Manish Kumawat • eCommerce Growth</p>
+            <div style="display:flex;gap:10px;align-items:center">
+                <a class="badge" href="#">LinkedIn</a>
+                <a class="badge" href="#">YouTube</a>
+                <a class="badge" href="#">X / Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+        // Footer year
+        document.getElementById('y').textContent = new Date().getFullYear();
+
+        // Fake send (no backend) — opens WhatsApp prefilled message as backup
+        function sendMessage(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const brand = document.getElementById('brand').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const msg = document.getElementById('message').value.trim();
+            const payload = encodeURIComponent(`Inquiry from ${name}\nBrand: ${brand}\nEmail: ${email}\nMessage: ${msg}`);
+            // change the phone below to your number with country code
+            const phone = '7340056977';
+            window.open(`https://wa.me/${phone}?text=${payload}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>
